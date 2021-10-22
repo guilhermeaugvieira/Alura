@@ -14,7 +14,8 @@ namespace LeilaoOnline.Core.Tests
         public void NaoPermiteNovosLancesDadoLeilaoFinalizado(int qtdLances, double[] ofertas, double posOferta)
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh");
+            var modalidade = new OfertaMaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
             var maria = new Interessada("Maria", leilao);
 
@@ -40,7 +41,8 @@ namespace LeilaoOnline.Core.Tests
         public void NaoAceitaProximoLanceDadoQueMesmoClienteRealizouUltimoLance()
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh");
+            var modalidade = new OfertaMaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
 
             leilao.IniciaPregao();

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeilaoOnline.Core
 {
@@ -15,37 +12,35 @@ namespace LeilaoOnline.Core
     
     public class Leilao
     {
-        private IList<Lance> _lances;
-        public IEnumerable<Lance> Lances => _lances;
+        public IList<Lance> Lances { get; private set; }
         public string Peca { get; }
         public Lance Ganhador { get; private set; }
         public EstadoLeilao Status { get; private set; }
-        public Interessada _ultimoCliente { get; private set; }
+        public Interessada UltimoCliente { get; private set; }
+        public IModalidadeAvaliacao Modalidade { get; private set; }
 
-        public Leilao(string peca)
+        public Leilao(string peca, IModalidadeAvaliacao modalidade)
         {
             Peca = peca;
-            _lances = new List<Lance>();
+            Lances = new List<Lance>();
             Status = EstadoLeilao.LeilaoEstabelecido;
+            Modalidade = modalidade;
         }
 
         public void RecebeLance(Interessada cliente, double valor)
         {
             if (AceitarNovoLance(cliente))
             {
-                _lances.Add(new Lance(cliente, valor));
-                _ultimoCliente = cliente;
+                Lances.Add(new Lance(cliente, valor));
+                UltimoCliente = cliente;
             }
         }
 
-        public void TerminaPregao() 
+        public virtual void TerminaPregao() 
         {
             if (Status == EstadoLeilao.LeilaoEstabelecido) throw new InvalidOperationException("Não é possível terminal o pregão sem que ele tenha começado. Para isso utilize o método IniciaPregao");
-            
-            Ganhador = _lances
-                .DefaultIfEmpty(new Lance(null, 0))
-                .OrderByDescending(x => x.Valor)
-                .FirstOrDefault();
+
+            Ganhador = Modalidade.Avalia(Lances);
 
             Status = EstadoLeilao.LeilaoFinalizado;
         }
@@ -55,9 +50,9 @@ namespace LeilaoOnline.Core
             Status = EstadoLeilao.LeilaoEmAndamento;
         }
 
-        private bool AceitarNovoLance(Interessada cliente)
+        public bool AceitarNovoLance(Interessada cliente)
         {
-            return (Status == EstadoLeilao.LeilaoEmAndamento && cliente != _ultimoCliente);
+            return (Status == EstadoLeilao.LeilaoEmAndamento && cliente != UltimoCliente);
         }
     }
 }

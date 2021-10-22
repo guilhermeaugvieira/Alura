@@ -8,7 +8,8 @@ namespace LeilaoOnline.ConsoleApplication
         static void Main(string[] args)
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh");
+            var modalidade = new OfertaMaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
             var maria = new Interessada("Maria", leilao);
 
