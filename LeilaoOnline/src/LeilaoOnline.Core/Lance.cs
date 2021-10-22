@@ -13,6 +13,8 @@ namespace LeilaoOnline.Core
 
         public Lance(Interessada cliente, double valor)
         {
+            if (valor < 0) throw new ArgumentException("O valor do lance deve ser positivo");
+            
             Cliente = cliente;
             Valor = valor;
         }
