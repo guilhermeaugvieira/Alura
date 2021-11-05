@@ -4,6 +4,7 @@ using Alura.CoisasAFazer.Core.Commands;
 using Alura.CoisasAFazer.Services.Handlers;
 using Alura.CoisasAFazer.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Alura.CoisasAFazer.WebApp.Controllers
 {
@@ -24,8 +25,9 @@ namespace Alura.CoisasAFazer.WebApp.Controllers
 
             var comando = new CadastraTarefa(model.Titulo, categoria, model.Prazo);
             IRepositorioTarefas repositorioTarefas = new RepositorioTarefa();
+            var logger = new LoggerFactory().CreateLogger<CadastraTarefaHandler>();
 
-            var handler = new CadastraTarefaHandler(repositorioTarefas);
+            var handler = new CadastraTarefaHandler(repositorioTarefas, logger);
             handler.Execute(comando);
             return Ok();
         }

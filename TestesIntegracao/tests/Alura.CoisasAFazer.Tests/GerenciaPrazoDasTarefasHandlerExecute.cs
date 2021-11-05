@@ -40,7 +40,7 @@ namespace Alura.CoisasAFazer.Tests
             };
 
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
-                .UseInMemoryDatabase("DbTarefas")
+                .UseInMemoryDatabase("DbTarefasContext")
                 .Options;
 
             var contexto = new DbTarefasContext(options);
