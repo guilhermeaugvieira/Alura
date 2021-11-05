@@ -3,6 +3,7 @@ using Alura.CoisasAFazer.WebApp.Models;
 using Alura.CoisasAFazer.Core.Commands;
 using Alura.CoisasAFazer.Services.Handlers;
 using Alura.CoisasAFazer.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alura.CoisasAFazer.WebApp.Controllers
 {
@@ -14,6 +15,7 @@ namespace Alura.CoisasAFazer.WebApp.Controllers
         public IActionResult EndpointCadastraTarefa(CadastraTarefaVM model)
         {
             var cmdObtemCateg = new ObtemCategoriaPorId(model.IdCategoria);
+
             var categoria = new ObtemCategoriaPorIdHandler().Execute(cmdObtemCateg);
             if (categoria == null)
             {

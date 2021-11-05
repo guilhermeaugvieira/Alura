@@ -9,10 +9,17 @@ namespace Alura.CoisasAFazer.Infrastructure
     {
         DbTarefasContext _ctx;
 
+        public RepositorioTarefa(DbTarefasContext context)
+        {
+            _ctx = context;
+        }
+
         public RepositorioTarefa()
         {
             _ctx = new DbTarefasContext();
         }
+
+
 
         public void AtualizarTarefas(params Tarefa[] tarefas)
         {
