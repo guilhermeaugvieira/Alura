@@ -29,7 +29,6 @@ namespace Alura.CoisasAFazer.Services.Handlers
             {
                 var tarefa = new Tarefa
                 (
-                    id: 0,
                     titulo: comando.Titulo,
                     prazo: comando.Prazo,
                     categoria: comando.Categoria,

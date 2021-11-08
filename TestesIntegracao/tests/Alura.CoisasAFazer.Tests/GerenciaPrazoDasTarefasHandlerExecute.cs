@@ -26,17 +26,17 @@ namespace Alura.CoisasAFazer.Tests
             var tarefas = new List<Tarefa>
             {
                 // Atrasadas a partir de 1/1/2019
-                new Tarefa(1,"Tirar Lixo", casaCateg, new DateTime(2018,12,31), null, StatusTarefa.Criada),
-                new Tarefa(4, "Fazer o almoço", casaCateg, new DateTime(2017,12,1), null, StatusTarefa.Criada),
-                new Tarefa(9, "Ir a academia", saudCateg, new DateTime(2018,12,31), null, StatusTarefa.Criada),
-                new Tarefa(7, "Concluir o relatório", trabCateg, new DateTime(2018,5,7), null, StatusTarefa.Pendente),
-                new Tarefa(10, "Beber água", saudCateg, new DateTime(2018,12,31), null, StatusTarefa.Criada),
+                new Tarefa("Tirar Lixo", casaCateg, new DateTime(2018,12,31), null, StatusTarefa.Criada),
+                new Tarefa("Fazer o almoço", casaCateg, new DateTime(2017,12,1), null, StatusTarefa.Criada),
+                new Tarefa("Ir a academia", saudCateg, new DateTime(2018,12,31), null, StatusTarefa.Criada),
+                new Tarefa("Concluir o relatório", trabCateg, new DateTime(2018,5,7), null, StatusTarefa.Pendente),
+                new Tarefa("Beber água", saudCateg, new DateTime(2018,12,31), null, StatusTarefa.Criada),
                 // A partir do prazo em 1/1/2019
-                new Tarefa(8, "Comparecer a reunião", trabCateg, new DateTime(2018,11,12), new DateTime(2018,11,30), StatusTarefa.Concluida),
-                new Tarefa(2, "Arrumar a cama", casaCateg, new DateTime(2019,4,5), null, StatusTarefa.Criada),
-                new Tarefa(3, "Escover os dentes", higiCateg, new DateTime(2019,1,2), null, StatusTarefa.Criada),
-                new Tarefa(5, "Comprar presente para mim", compCateg, new DateTime(2019,10,8), null, StatusTarefa.Criada),
-                new Tarefa(6, "Comprar ração", compCateg, new DateTime(2019,11,20), null, StatusTarefa.Criada),
+                new Tarefa("Comparecer a reunião", trabCateg, new DateTime(2018,11,12), new DateTime(2018,11,30), StatusTarefa.Concluida),
+                new Tarefa("Arrumar a cama", casaCateg, new DateTime(2019,4,5), null, StatusTarefa.Criada),
+                new Tarefa("Escover os dentes", higiCateg, new DateTime(2019,1,2), null, StatusTarefa.Criada),
+                new Tarefa("Comprar presente para mim", compCateg, new DateTime(2019,10,8), null, StatusTarefa.Criada),
+                new Tarefa("Comprar ração", compCateg, new DateTime(2019,11,20), null, StatusTarefa.Criada),
             };
 
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
@@ -70,9 +70,9 @@ namespace Alura.CoisasAFazer.Tests
             var tarefas = new List<Tarefa>
             {
                 // Atrasadas a partir de 1/1/2019
-                new Tarefa(1,"Tirar Lixo", categ, new DateTime(2018,12,31), null, StatusTarefa.Criada),
-                new Tarefa(4, "Fazer o almoço", categ, new DateTime(2017,12,1), null, StatusTarefa.Criada),
-                new Tarefa(9, "Ir a academia", categ, new DateTime(2018,12,31), null, StatusTarefa.Criada),
+                new Tarefa("Tirar Lixo", categ, new DateTime(2018,12,31), null, StatusTarefa.Criada),
+                new Tarefa("Fazer o almoço", categ, new DateTime(2017,12,1), null, StatusTarefa.Criada),
+                new Tarefa("Ir a academia", categ, new DateTime(2018,12,31), null, StatusTarefa.Criada),
             };
 
             var mock = new Mock<IRepositorioTarefas>();
