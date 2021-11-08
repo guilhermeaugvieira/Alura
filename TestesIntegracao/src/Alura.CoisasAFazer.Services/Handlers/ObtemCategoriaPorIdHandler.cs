@@ -1,21 +1,25 @@
 ﻿using Alura.CoisasAFazer.Core.Commands;
 using Alura.CoisasAFazer.Core.Models;
 using Alura.CoisasAFazer.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Alura.CoisasAFazer.Services.Handlers
 {
     public class ObtemCategoriaPorIdHandler
     {
         IRepositorioTarefas _repo;
+        ILogger<ObtemCategoriaPorIdHandler> _logger;
 
-        public ObtemCategoriaPorIdHandler(IRepositorioTarefas repo)
+        public ObtemCategoriaPorIdHandler(IRepositorioTarefas repo, ILogger<ObtemCategoriaPorIdHandler> logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
-        public ObtemCategoriaPorIdHandler()
+        public ObtemCategoriaPorIdHandler(IRepositorioTarefas repositorio)
         {
-            _repo = new RepositorioTarefa();
+            _repo = repositorio;
+            _logger = new LoggerFactory().CreateLogger<ObtemCategoriaPorIdHandler>();
         }
 
         public Categoria Execute(ObtemCategoriaPorId comando)

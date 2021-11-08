@@ -20,7 +20,6 @@ namespace Alura.CoisasAFazer.Infrastructure
         }
 
 
-
         public void AtualizarTarefas(params Tarefa[] tarefas)
         {
             _ctx.Tarefas.UpdateRange(tarefas);

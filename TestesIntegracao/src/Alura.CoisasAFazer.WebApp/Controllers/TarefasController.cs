@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Alura.CoisasAFazer.WebApp.Models;
-using Alura.CoisasAFazer.Core.Commands;
-using Alura.CoisasAFazer.Services.Handlers;
+﻿using Alura.CoisasAFazer.Core.Commands;
 using Alura.CoisasAFazer.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using Alura.CoisasAFazer.Services.Handlers;
+using Alura.CoisasAFazer.WebApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Alura.CoisasAFazer.WebApp.Controllers
@@ -12,24 +11,39 @@ namespace Alura.CoisasAFazer.WebApp.Controllers
     [ApiController]
     public class TarefasController : ControllerBase
     {
+        IRepositorioTarefas _repo;
+        ILogger<TarefasController> _logger;
+
+        public TarefasController(IRepositorioTarefas repo, ILogger<TarefasController> logger)
+        {
+            _repo = repo;
+            _logger = logger;
+        }
+
+        public TarefasController(IRepositorioTarefas repo)
+        {
+            _repo = repo;
+            _logger = new LoggerFactory().CreateLogger<TarefasController>();
+        }
+        
         [HttpPost]
         public IActionResult EndpointCadastraTarefa(CadastraTarefaVM model)
         {
             var cmdObtemCateg = new ObtemCategoriaPorId(model.IdCategoria);
 
-            var categoria = new ObtemCategoriaPorIdHandler().Execute(cmdObtemCateg);
+            var categoria = new ObtemCategoriaPorIdHandler(_repo).Execute(cmdObtemCateg);
             if (categoria == null)
             {
                 return NotFound("Categoria não encontrada");
             }
 
             var comando = new CadastraTarefa(model.Titulo, categoria, model.Prazo);
-            IRepositorioTarefas repositorioTarefas = new RepositorioTarefa();
-            var logger = new LoggerFactory().CreateLogger<CadastraTarefaHandler>();
 
-            var handler = new CadastraTarefaHandler(repositorioTarefas, logger);
-            handler.Execute(comando);
-            return Ok();
+            var handler = new CadastraTarefaHandler(_repo);
+            var resultado =  handler.Execute(comando);
+
+            if (resultado.IsSuccess) return Ok();
+            return StatusCode(500);
         }
     }
 }
