@@ -21,7 +21,7 @@ namespace Alura.CoisasAFazer.Tests
             var mockLogger = new Mock<ILogger<CadastraTarefaHandler>>();
 
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
-                .UseInMemoryDatabase("DbTarefasContext").Options;
+                .UseInMemoryDatabase("DbTarefasContext3").Options;
             var context = new DbTarefasContext(options);
             var repoTarefas = new RepositorioTarefa(context);
 
